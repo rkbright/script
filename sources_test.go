@@ -23,7 +23,7 @@ func TestArgs(t *testing.T) {
 		t.Error(err)
 	}
 	want := "hello\nworld\n"
-	if string(got) != want {
+	if want != string(got) {
 		t.Errorf("want %q, got %q", want, string(got))
 	}
 }
@@ -36,7 +36,7 @@ func TestEcho(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if got != want {
+	if want != got {
 		t.Errorf("want %q, got %q", want, got)
 	}
 }
@@ -117,7 +117,7 @@ func TestFile(t *testing.T) {
 		t.Error(err)
 	}
 	got := string(gotRaw)
-	if got != want {
+	if want != got {
 		t.Errorf("want %q, got %q", want, got)
 	}
 	q := File("doesntexist")
@@ -187,7 +187,7 @@ func TestListFilesMultipleFiles(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if got != want {
+	if want != got {
 		t.Errorf("Want %q, got %q", want, got)
 	}
 }
@@ -250,7 +250,7 @@ func TestStdin(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if string(got) != want {
+	if want != string(got) {
 		t.Errorf("want %q, got %q", want, string(got))
 	}
 }

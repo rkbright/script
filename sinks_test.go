@@ -2,10 +2,11 @@ package script
 
 import (
 	"bytes"
-	"github.com/google/go-cmp/cmp"
 	"io/ioutil"
 	"os"
 	"testing"
+
+	"github.com/google/go-cmp/cmp"
 )
 
 // doSinksOnPipe calls every kind of sink method on the supplied pipe and
@@ -78,7 +79,7 @@ func TestAppendFile(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if got != orig+extra {
+	if orig+extra != got {
 		t.Errorf("want %q, got %q", orig+extra, got)
 	}
 }
@@ -94,7 +95,7 @@ func TestBytes(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if !bytes.Equal(got, want) {
+	if !bytes.Equal(want, got) {
 		t.Errorf("want %q, got %q", want, got)
 	}
 }
@@ -123,7 +124,7 @@ func TestCountLines(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if got != want {
+	if want != got {
 		t.Errorf("want %d lines, got %d", want, got)
 	}
 	_, err = ioutil.ReadAll(p.Reader)
@@ -180,7 +181,7 @@ func TestSliceSink(t *testing.T) {
 		wantErr bool
 	}{
 		{
-			name: "Multiple lines pipe",
+			name:   "Multiple lines pipe",
 			fields: Echo("testdata/multiple_files/1.txt\ntestdata/multiple_files/2.txt\ntestdata/multiple_files/3.tar.zip\n"),
 			want: []string{
 				"testdata/multiple_files/1.txt",
@@ -190,19 +191,19 @@ func TestSliceSink(t *testing.T) {
 			wantErr: false,
 		},
 		{
-			name: "Empty pipe",
-			fields: Echo(""),
-			want: []string{},
+			name:    "Empty pipe",
+			fields:  Echo(""),
+			want:    []string{},
 			wantErr: false,
 		},
 		{
-			name: "Single newline",
-			fields: Echo("\n"),
-			want: []string{""},
+			name:    "Single newline",
+			fields:  Echo("\n"),
+			want:    []string{""},
 			wantErr: false,
 		},
 		{
-			name: "Empty line between two existing lines",
+			name:   "Empty line between two existing lines",
 			fields: Echo("testdata/multiple_files/1.txt\n\ntestdata/multiple_files/3.tar.zip"),
 			want: []string{
 				"testdata/multiple_files/1.txt",
@@ -281,7 +282,7 @@ func TestString(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if got != want {
+	if want != got {
 		t.Errorf("want %q, got %q", want, got)
 	}
 	_, err = p.String() // result should be empty
@@ -313,7 +314,7 @@ func TestWriteFile(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if got != want {
+	if want != got {
 		t.Errorf("want %q, got %q", want, got)
 	}
 }

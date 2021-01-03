@@ -23,7 +23,7 @@ func TestWithReader(t *testing.T) {
 	if err != nil {
 		t.Error(err)
 	}
-	if got != want {
+	if want != got {
 		t.Errorf("want %q, got %q", want, got)
 	}
 }
@@ -73,7 +73,7 @@ func TestExitStatus(t *testing.T) {
 		p := NewPipe()
 		p.SetError(fmt.Errorf(tc.input))
 		got := p.ExitStatus()
-		if got != tc.want {
+		if tc.want != got {
 			t.Errorf("input %q: want %d, got %d", tc.input, tc.want, got)
 		}
 	}
